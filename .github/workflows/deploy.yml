@@ -32,5 +32,4 @@ jobs:
             cd your-repo-name
             pip3 install --break-system-packages -r requirements.txt
             pkill -f gunicorn || true
-            nohup gunicorn -b 0.0.0.0:5000 app:app > output.log 2>&1 &
-            tail -f output.log
+            nohup /home/ubuntu/.local/bin/gunicorn -b 0.0.0.0:5000 app:app > output.log 2>&1 &
