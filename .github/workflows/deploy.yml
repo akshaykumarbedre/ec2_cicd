@@ -21,6 +21,7 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           source: "."
           target: "/home/${{ secrets.EC2_USER }}/your-repo-name"
+          rm: true # Optional: cleans target dir before copy
 
       - name: SSH and restart Flask app
         uses: appleboy/ssh-action@v1.0.3
@@ -31,6 +32,7 @@ jobs:
           script: |
             cd your-repo-name
             pip3 install --break-system-packages -r requirements.txt
-            pkill -f gunicorn || true
-            nohup /home/ubuntu/.local/bin/gunicorn -b 0.0.0.0:5000 app:app > output.log 2>&1 &
-            disown
+            sudo systemctl daemon-reexec
+            sudo systemctl daemon-reload
+            sudo systemctl restart flaskapp
+            sudo systemctl status flaskapp --no-pager
