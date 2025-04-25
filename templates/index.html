@@ -1,0 +1,183 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AWS EC2 Deployment</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --aws-blue: #232F3E;
+            --aws-orange: #FF9900;
+            --aws-light-blue: #1A3E6D;
+        }
+        body {
+            background-color: #F2F3F3;
+            font-family: 'Amazon Ember', Arial, sans-serif;
+        }
+        .navbar {
+            background-color: var(--aws-blue);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .container-main { 
+            margin-top: 30px; 
+            margin-bottom: 30px;
+        }
+        .aws-card {
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
+        .aws-card-header {
+            background-color: var(--aws-blue);
+            color: white;
+            padding: 15px 20px;
+            border-bottom: 3px solid var(--aws-orange);
+        }
+        .aws-orange {
+            color: var(--aws-orange);
+            font-weight: bold;
+        }
+        .aws-blue {
+            color: var(--aws-blue);
+            font-weight: bold;
+        }
+        .info-panel {
+            border-left: 3px solid var(--aws-orange);
+            background-color: rgba(255,153,0,0.05);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 4px 4px 0;
+        }
+        .aws-footer {
+            background-color: var(--aws-blue);
+            color: #DDD;
+            padding: 10px;
+            font-size: 0.85rem;
+            border-top: 2px solid var(--aws-orange);
+        }
+        .status-badge {
+            background-color: #00A400;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        .service-icon {
+            font-size: 2.2rem;
+            margin-right: 15px;
+            color: var(--aws-orange);
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-dark">
+        <div class="container">
+            <span class="navbar-brand">
+                <span style="color: var(--aws-orange); font-weight: bold;">AWS</span> 
+                Deployment Dashboard
+            </span>
+            <span class="text-white"><i class="bi bi-clock"></i> {{ current_time }}</span>
+        </div>
+    </nav>
+    
+    <div class="container container-main">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="aws-card mb-4">
+                    <div class="aws-card-header d-flex justify-content-between align-items-center">
+                        <h3 class="mb-0">
+                            <i class="bi bi-cloud-check service-icon"></i>
+                            EC2 Deployment Status
+                        </h3>
+                        <span class="status-badge">
+                            <i class="bi bi-check-circle-fill"></i> RUNNING
+                        </span>
+                    </div>
+                    <div class="card-body p-4">
+                        <div class="alert alert-success d-flex align-items-center">
+                            <i class="bi bi-check-circle-fill me-2" style="font-size: 1.5rem;"></i>
+                            <div>
+                                <strong>Deployment Successful!</strong> Your application has been deployed to the EC2 instance using CI/CD pipeline.
+                            </div>
+                        </div>
+                        
+                        <div class="info-panel">
+                            <h5><i class="bi bi-info-circle"></i> Instance Information</h5>
+                            <div class="row mt-3">
+                                <div class="col-md-6">
+                                    <p><strong>Hostname:</strong> <code>{{ hostname }}</code></p>
+                                    <p><strong>Region:</strong> <span class="aws-blue">us-east-1</span></p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p><strong>Service:</strong> <span class="aws-orange">Amazon EC2</span></p>
+                                    <p><strong>Deployment:</strong> GitHub Actions</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <h5 class="mt-4"><i class="bi bi-diagram-3"></i> Deployment Architecture</h5>
+                        <div class="row mt-3 text-center">
+                            <div class="col-md-4">
+                                <div class="p-3 border rounded mb-3">
+                                    <i class="bi bi-github" style="font-size: 2rem;"></i>
+                                    <h6 class="mt-2">GitHub</h6>
+                                    <small class="text-muted">Source Code</small>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="p-3 border rounded mb-3">
+                                    <i class="bi bi-arrow-repeat" style="font-size: 2rem; color: var(--aws-orange);"></i>
+                                    <h6 class="mt-2">CI/CD Pipeline</h6>
+                                    <small class="text-muted">GitHub Actions</small>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="p-3 border rounded mb-3">
+                                    <i class="bi bi-hdd-rack" style="font-size: 2rem; color: var(--aws-blue);"></i>
+                                    <h6 class="mt-2">AWS EC2</h6>
+                                    <small class="text-muted">Production</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="aws-card">
+                    <div class="aws-card-header">
+                        <h4 class="mb-0"><i class="bi bi-gear"></i> Application Details</h4>
+                    </div>
+                    <div class="card-body p-4">
+                        <p>This Flask application has been automatically deployed to an AWS EC2 instance using GitHub Actions workflow.</p>
+                        <div class="d-flex justify-content-between mt-4">
+                            <div>
+                                <small class="text-muted">Deployed by</small>
+                                <p class="mb-0"><strong>Akshay</strong></p>
+                            </div>
+                            <div>
+                                <small class="text-muted">Last updated</small>
+                                <p class="mb-0"><strong>{{ current_time }}</strong></p>
+                            </div>
+                            <div>
+                                <small class="text-muted">Status</small>
+                                <p class="mb-0"><span class="aws-orange">Running</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer class="aws-footer text-center mt-4">
+        <div class="container">
+            <p class="mb-1">Flask application running on AWS EC2 instance | Powered by AWS Cloud Infrastructure</p>
+            <small>© {{ current_time.split('-')[0] }} Amazon Web Services Demo</small>
+        </div>
+    </footer>
+</body>
+</html>
