@@ -94,6 +94,9 @@ Visit: `http://localhost:5000`
 
 **Akshay**
 *This project demonstrates automated infrastructure deployment with simplicity and elegance.*
+---
+##  Screenshort
+![image](https://github.com/user-attachments/assets/d28ec224-0673-4565-bc0f-acfbbdbf2c01)
 
 ---
 
