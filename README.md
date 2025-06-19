@@ -1,18 +1,3 @@
-Based on your project, here's a suitable **repository name** and a complete `README.md` file:
-
----
-
-### ✅ **Repository Name Suggestion**
-
-**`flask-ec2-github-actions-deploy`**
-
-> Clear, descriptive, and includes key technologies: Flask, EC2, and GitHub Actions.
-
----
-
-### 📘 **README.md**
-
-```markdown
 # Flask EC2 GitHub Actions Deploy 🚀
 
 A simple and stylish Flask web application deployed to an AWS EC2 instance using a fully automated GitHub Actions CI/CD pipeline.
@@ -20,7 +5,6 @@ A simple and stylish Flask web application deployed to an AWS EC2 instance using
 ## 📁 Project Structure
 
 ```
-
 .
 ├── .github/
 │   └── workflows/
@@ -30,7 +14,7 @@ A simple and stylish Flask web application deployed to an AWS EC2 instance using
 ├── app.py                    # Flask application
 ├── requirements.txt          # Python dependencies
 
-````
+```
 
 ## 🖥️ Live Dashboard
 
@@ -74,7 +58,7 @@ Automated deployment using GitHub Actions:
 ```bash
 git clone https://github.com/your-username/flask-ec2-github-actions-deploy.git
 cd flask-ec2-github-actions-deploy
-````
+```
 
 ### 2. Run Locally (for testing)
 
@@ -113,14 +97,6 @@ Visit: `http://localhost:5000`
 
 ---
 
-
 ## 📄 License
 
 MIT License. See `LICENSE` file for more info.
-
-```
-
----
-
-Let me know if you want the README in a downloadable file or want to add a badge, deployment diagram, or custom domain info!
-```
